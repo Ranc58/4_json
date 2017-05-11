@@ -1,17 +1,23 @@
 # Prettify JSON
 
-[TODO. There will be project description]
+This program take JSON file and print content in terminal
 
 # Quickstart
 
-[TODO]
+Run pprint_json.py
 
 Example of script launch on Linux, Python 3.5:
 
 ```#!bash
 
-$ python pprint_json.py <path to file>
-# TODO add output example
+$ python pprint_json.py
+# please enter way to JSON: <path to file>
+[
+    {
+        "date": "2017-05-10",
+        "title": "Conference"
+    }
+]
 
 ```
 
