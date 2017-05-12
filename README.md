@@ -11,7 +11,7 @@ Example of script launch on Linux, Python 3.5:
 ```#!bash
 
 $ python pprint_json.py
-# please enter way to JSON: <path to file>
+# Please enter full way to JSON file: <path to file>
 [
     {
         "date": "2017-05-10",
