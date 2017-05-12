@@ -1,24 +1,27 @@
 import json
-import os
 
 
-def load_data(filepath):
-    if not os.path.exists(filepath):
-        print('file not exist')
-    with open(filepath, 'r', encoding='windows-1251') as file_handler:
-        content_json = json.load(file_handler)
-        user_friendly_json = pretty_print_json(content_json)
-        print(user_friendly_json)
+def load_data(func):
+    def wrapped(filepath):
+        try:
+            file_handler = open(filepath, 'r', encoding='windows-1251')
+            content_json = json.load(file_handler)
+            func(content_json)
+            file_handler.close()
+        except ValueError:
+            print('JSON file contain errors! ')
+        except FileNotFoundError:
+            print('Not found JSON file. Please check way. ')
+    return wrapped
 
 
-def pretty_print_json(data):
-    decode_json = json.dumps(data, sort_keys=True,
-                             indent=4, ensure_ascii=False)
-    return decode_json
+@load_data
+def pretty_print_json(content_json):
+    user_friendly_json = json.dumps(content_json, sort_keys=True,
+                                    indent=4, ensure_ascii=False)
+    print(user_friendly_json)
 
 
 if __name__ == '__main__':
-    pass
-
-input_way = input('Please enter way to JSON: ')
-load_data(input_way)
+    input_way = input('Please enter full way to JSON file: ')
+    pretty_print_json(input_way)
