@@ -1,22 +1,19 @@
 import json
+import sys
 
 
-def load_data(func):
-    def wrapped(filepath):
-        try:
-            file_handler = open(filepath, 'r', encoding='windows-1251')
+def load_data(input_way):
+    try:
+        with open(input_way, 'r', encoding='UTF-8') as file_handler:
             content_json = json.load(file_handler)
-            func(content_json)
-            file_handler.close()
-        except ValueError:
-            print('JSON file contain errors! ')
-        except FileNotFoundError:
-            print('Not found JSON file. Please check way. ')
-    return wrapped
+    except (ValueError, FileNotFoundError) as error:
+        print(error)
+        sys.exit()
+    return content_json
 
 
-@load_data
-def pretty_print_json(content_json):
+def pretty_print_json(input_way):
+    content_json = load_data(input_way)
     user_friendly_json = json.dumps(content_json, sort_keys=True,
                                     indent=4, ensure_ascii=False)
     print(user_friendly_json)
