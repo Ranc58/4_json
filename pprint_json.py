@@ -23,7 +23,7 @@ def pretty_print_json(load_data):
         print(user_friendly_json)
     else:
         print("Error! Please check JSON file and directory way")
-        start_program()
+        load_way_and_output_json_content()
 
 
 if __name__ == '__main__':
